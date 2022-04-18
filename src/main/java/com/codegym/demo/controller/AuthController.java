@@ -112,9 +112,6 @@ public class AuthController {
             String companyCode = company.getShortName().substring(0, 3) + company.getId() + (int) (Math.random() * (9999 - 1000) + 1000);
             company.setCompanyCode(companyCode);
             Company company1 = companyService.save(company);
-//            if (company1 != null) {
-//                emailService.sendVerificationEmailCompany(company);
-//            }
             return new ResponseEntity<>(new ResponseBody(Response.SUCCESS, company1), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ResponseBody(Response.SYSTEM_ERROR, null), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -170,7 +167,7 @@ public class AuthController {
     }
 
     @PostMapping("/admins/register")
-    public ResponseEntity<?> registeradmin(@Validated @RequestBody AdminRegisterForm registerForm, BindingResult bindingResult, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> registerAdmin(@Validated @RequestBody AdminRegisterForm registerForm, BindingResult bindingResult, HttpServletRequest request) throws Exception {
         try {
             if (bindingResult.hasFieldErrors()) {
                 return new ResponseEntity<>(new ResponseBody(Response.OBJECT_INVALID, null), HttpStatus.BAD_REQUEST);
